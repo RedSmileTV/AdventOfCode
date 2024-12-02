@@ -1,7 +1,7 @@
 use crate::read_file;
 
 pub fn solve() {
-    let input: Vec<i32> = read_file("inputs/day01_part1.txt");
+    let input: Vec<i32> = read_file("inputs/part1.txt");
     let mut left = split_input(input.clone()).0;
     let mut right = split_input(input.clone()).1;
 
