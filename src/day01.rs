@@ -1,3 +1,5 @@
-fn main() {
+pub fn solve() {
+
+
     println!("Hello, world!");
 }
