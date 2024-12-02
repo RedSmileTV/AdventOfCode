@@ -1,16 +1,33 @@
 use crate::read_file;
 
 pub fn solve() {
-    let input: Vec<i32> = read_file("inputs/part1.txt");
-    let mut left = split_input(input.clone()).0;
-    let mut right = split_input(input.clone()).1;
+    // Getting the input
+    let input: Vec<i32> = read_file("inputs/day01.txt");
+    let left: Vec<i32> = split_input(input.clone()).0;
+    let right: Vec<i32> = split_input(input.clone()).1;
 
-    left = sort_ascending(left);
-    right = sort_ascending(right);
+    // Solving Part 1
+    let differences: Vec<i32> = get_differences(sort_ascending(left.clone()), sort_ascending(right.clone()));
+    println!("Day 01 part 1 solution: {}", sum(differences));
 
-    let differences = get_differences(left, right);
+    // Solving Part 2
+    let similarities: Vec<i32> = find_similarities(left.clone(), right.clone());
+    println!("Day 01 part 2 solution: {}", sum(similarities))
+}
 
-    println!("Day 01 solution: {}", sum(differences));
+fn find_similarities(left: Vec<i32>, right: Vec<i32>) -> Vec<i32> {
+    let mut similarities: Vec<i32> = Vec::new();
+    let mut count: i32 = 0;
+    for i in 0..left.len() {
+        for j in 0..right.len() {
+            if left[i] == right[j] {
+                count += 1;
+            }
+        }
+        similarities.push(left[i] * count.clone());
+        count = 0
+    }
+    similarities
 }
 
 fn get_differences(left: Vec<i32>, right: Vec<i32>) -> Vec<i32> {
