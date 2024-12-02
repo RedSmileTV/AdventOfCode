@@ -1,6 +1,5 @@
-use std::collections::HashMap;
 use std::fs::File;
-use std::io::{BufRead, Read};
+use std::io::{BufRead, BufReader, Read};
 
 mod day01;
 mod day02;
@@ -17,14 +16,18 @@ pub fn read_file_to_array(path: &str) -> Vec<i32> {
     contents.split_whitespace().map(|s| s.parse().unwrap()).collect()
 }
 
-pub fn read_file_to_hashmap(path: &str) -> HashMap<u32, Vec<i32>> {
-    let mut map: HashMap<u32, Vec<i32>> = HashMap::new();
-    let file = File::open(path).expect("File not found");
-    let reader = std::io::BufReader::new(file);
-    for (index, line) in reader.lines().enumerate() {
-        let line = line.unwrap();
-        let numbers: Vec<i32> = line.split_whitespace().map(|s| s.parse().unwrap()).collect();
-        map.insert(index as u32, numbers);
+pub fn read_file_to_big_array(path: &str) -> Vec<Vec<i32>> {
+    let mut big_array: Vec<Vec<i32>> = Vec::new();
+    let file: File = File::open(path).expect("File not found");
+    let reader: BufReader<File> = BufReader::new(file);
+
+    for i in 0..reader.lines() {
+        let line = reader.lines().nth(i).unwrap().unwrap();
+        let array: Vec<i32> = line.split_whitespace().map(|s| s.parse().unwrap()).collect();
+        big_array.push(array);
     }
-    map
+    big_array
+
+
+
 }
