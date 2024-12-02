@@ -1,8 +1,11 @@
-use crate::read_file;
+use crate::{read_file_to_array};
 
+#[allow(dead_code)]
 pub fn solve() {
     // Getting the input
-    let input: Vec<i32> = read_file("inputs/day01.txt");
+    let input: Vec<i32> = read_file_to_array("inputs/day01.txt");
+
+    // Splitting the array in two arrays
     let left: Vec<i32> = split_input(input.clone()).0;
     let right: Vec<i32> = split_input(input.clone()).1;
 
